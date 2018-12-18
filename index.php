@@ -76,7 +76,7 @@
                                 <a href="#" class="btn btn-primary left-margin">
                                     <span class='glyphicon glyphicon-list'></span> Read
                                 </a>
-                                <a href="#" class="btn btn-info left-margin">
+                                <a href="update_product.php?id=<?php echo $id; ?>" class="btn btn-info left-margin">
                                     <span class='glyphicon glyphicon-edit'></span> Edit
                                 </a>
                                 <a href="#" class="btn btn-danger delete-object">
