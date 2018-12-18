@@ -53,13 +53,17 @@ class Product
 
     }
 
-    public function readAll()
+    public function readAll($fromRecordNum, $recordsPerPage)
     {
 
-    	$query = 'SELECT
+    	$query = "SELECT
                 id, fullname, description, price, category_id
             FROM
-                ' . $this->tableName . '';
+                " . $this->tableName . "
+            ORDER BY
+                fullname ASC
+            LIMIT
+                {$fromRecordNum}, {$recordsPerPage}";
  
 	    $stmt = $this->conn->prepare($query);
 	    $stmt->execute();
