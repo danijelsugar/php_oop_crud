@@ -1,35 +1,43 @@
 <?php
-	
-	// include database and object files
-	include_once 'config/Database.php';
-	include_once 'objects/Product.php';
-	include_once 'objects/category.php';
 
-	// instance database and objects
-	$database = new Database();
-	$db = $database->getConnection();
+    // page given in URL parameter, default page is one
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+     
+    // set number of records per page
+    $recordsPerPage = 5;
+     
+    // calculate for the query LIMIT clause
+    $fromRecordNum = ($recordsPerPage * $page) - $recordsPerPage;
 
-	$product = new Product($db);
+    // include database and object files
+    include_once 'config/Database.php';
+    include_once 'objects/Product.php';
+    include_once 'objects/category.php';
+
+    // instance database and objects
+    $database = new Database();
+    $db = $database->getConnection();
+
+    $product = new Product($db);
     $category = new Category($db);
 
     //query products
-	$stmt = $product->readAll();
-	$num = $stmt->rowCount();
-	
-
-	// set page header
-	$pageTitle = 'Read Products';
-	include_once 'layout_header.php';
+    $stmt = $product->readAll($fromRecordNum, $recordsPerPage);
+    $num = $stmt->rowCount();
+    
+    // set page header
+    $pageTitle = 'Read Products';
+    include_once 'layout_header.php';
 
     // create button
 ?>
-	<div class="row">
+    <div class="row">
         <div class="col 12">
-    		<div class="right-button-margin">
-    			<a href="create_product.php" class="btn btn-primary pull-right">Create</a>
-    		</div>
+            <div class="right-button-margin">
+                <a href="create_product.php" class="btn btn-primary pull-right">Create</a>
+            </div>
         </div>
-	</div>
+    </div>
 <?php
     // display product if there are any
     if($num>0): 
@@ -88,9 +96,24 @@
             </div>
         </div>
     <?php endif; ?>
-    	
+
+<?php 
+
+    // the page where this paging is used
+    $pageUrl = "index.php?";
+     
+    // count all products in the database to calculate total pages
+    $totalRows = $product->countAll();
+     
+    // paging buttons here
+?>  
+
+    <div class="row">
+        <div class="col 12">
+            <?php include_once 'paging.php'; ?>
+        </div>
+    </div>
 
 
-	<?php include_once 'layout_footer.php';
-    
+    <?php include_once 'layout_footer.php';
     
