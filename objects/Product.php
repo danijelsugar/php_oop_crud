@@ -85,4 +85,28 @@ class Product
         return $num;
 
     }
+
+    public function readOne() 
+    {
+
+        $query = 'SELECT
+                    id, fullname, description, price, category_id 
+                FROM 
+                    ' . $this->tableName . '
+                WHERE 
+                    id=:id
+                LIMIT 0,1';
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam('id',$this->id);
+        $stmt->execute();
+
+        $row = $stmt->feetch(PDO::FETCH_ASSOC);
+
+        $this->fullname = $row['fullname'];
+        $this->description = $row['description'];
+        $this->price = $row['price'];
+        $this->category_id = $row['category_id'];
+
+    }
 }
