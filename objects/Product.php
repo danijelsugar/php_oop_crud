@@ -149,4 +149,15 @@ class Product
         }
     }
 
+    public function delete() 
+    {
+
+        $query = "DELETE FROM " . $this->tableName . " WHERE id=:id";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $this->id);
+        $stmt->execute();
+
+    }
+
 }
