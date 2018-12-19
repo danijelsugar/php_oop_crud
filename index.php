@@ -79,7 +79,7 @@
                                 <a href="update_product.php?id=<?php echo $id; ?>" class="btn btn-info left-margin">
                                     <span class='glyphicon glyphicon-edit'></span> Edit
                                 </a>
-                                <a href="#" class="btn btn-danger delete-object">
+                                <a href="delete_product.php?id=<?php echo $id; ?>" class="btn btn-danger delete-object">
                                     <span class='glyphicon glyphicon-remove'></span> Delete
                                 </a>
                             </td>
