@@ -4,7 +4,8 @@
 <?php
 	//button for first page
 	if($page>1){
-		echo '<li class="page-item"><a class="page-link" href="' . $pageUrl . '" title="Go to first page">First</a></li>';
+		//echo '<li class="page-item"><a class="page-link" href="' . $pageUrl . '" title="Go to first page">First</a></li>';
+		echo "<li class='page-item'><a class='page-link' href='$pageUrl' title='Go to first page'>First</a></li>";
 	}
 	
 	//calculates total pages
@@ -24,20 +25,19 @@
 
     		// current page
     		if($x==$page){
-    			echo "<li class='active page-item'><a class=\"page-link\" href=\"#\">$x <span class=\"sr-only\">(current)</span></a></li>";
-    			//echo '<li class="active"><a href="#">$x <span class="sr-only">(current)</span></a></li>';
+    			echo "<li class='active page-item'><a class='page-link' href='#'>$x <span class='sr-only'>(current)</span></a></li>";
     		}
 
     		// not current page
     		else {
-    			echo '<li class="page-item"><a class="page-link" href="'. $pageUrl . 'page=' . $x .'">'. $x . '</a></li>';
+    			echo "<li class ='page-item'><a class='page-link' href='{$pageUrl}page=$x'>$x</a></li>";
     		}
     	}
 	}
 
 	//button for last page
 	if($page<$totalPages){
-		echo '<li class="page-item"><a class="page-link" href="' . $pageUrl . 'page=' . $totalPages . '" title="Last page">Last</a></li>';
+		echo "<li class='page-item'><a class='page-link' href='{$pageUrl}page=$totalPages' title='Last page'>Last</a></li>";
 	}
 
 ?>
