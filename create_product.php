@@ -16,8 +16,7 @@
 	$pageTitle = 'Create Product';
 	include_once 'layout_header.php';
 
-?>
-<?php 
+
 	//if the form have been submited
 	if(isset($_POST["create_product"])){
 
@@ -70,8 +69,8 @@
 							$stmt = $category->read();
 
 							// write them in drop-down
-							while($row_category = $stmt->fetch(PDO::FETCH_ASSOC)):
-								extract($row_category);
+							while($rowCategory = $stmt->fetch(PDO::FETCH_ASSOC)):
+								extract($rowCategory);
 						?>
 						<option value="<?php echo $id; ?>"><?php echo $fullname; ?></option>
 						<?php endwhile; ?>
