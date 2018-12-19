@@ -25,7 +25,7 @@ class Product
     {
 
     	//query
-    	$query = 'INSERT INTO ' . $this->tableName . ' SET fullname=:fullname, price=:price, description=:description, category_id=:category_id, created=:created';
+    	$query = "INSERT INTO " . $this->tableName . " SET fullname=:fullname, price=:price, description=:description, category_id=:category_id, created=:created";
 
     	$stmt = $this->conn->prepare($query);
 
@@ -76,7 +76,7 @@ class Product
     public function countAll() 
     {
 
-        $query = 'SELECT id FROM ' . $this->tableName . '';
+        $query = "SELECT id FROM " . $this->tableName . "";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
@@ -86,22 +86,23 @@ class Product
 
     }
 
+    //reads all information about a particular product 
     public function readOne() 
     {
 
-        $query = 'SELECT
+        $query = "SELECT
                     id, fullname, description, price, category_id 
                 FROM 
-                    ' . $this->tableName . '
+                    " . $this->tableName . "
                 WHERE 
                     id=:id
-                LIMIT 0,1';
+                LIMIT 0,1";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam('id',$this->id);
         $stmt->execute();
 
-        $row = $stmt->feetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $this->fullname = $row['fullname'];
         $this->description = $row['description'];
@@ -109,4 +110,43 @@ class Product
         $this->category_id = $row['category_id'];
 
     }
+
+    //updates particular product
+    public function update() 
+    {
+
+        $query = "UPDATE "
+                    . $this->tableName . " 
+                SET
+                    fullname=:fullname,
+                    price=:price,
+                    description=:description,
+                    category_id=:category_id
+                WHERE
+                    id=:id";
+
+        $stmt = $this->conn->prepare($query);
+
+        //posted values
+        $this->fullname = htmlspecialchars(strip_tags($this->fullname));
+        $this->price = htmlspecialchars(strip_tags($this->price));
+        $this->description = htmlspecialchars(strip_tags($this->description));
+        $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        //bind parameters
+        $stmt->bindParam(":fullname", $this->fullname);
+        $stmt->bindParam(":price", $this->price);
+        $stmt->bindParam(":description", $this->description);
+        $stmt->bindParam(":category_id", $this->category_id);
+        $stmt->bindParam(":id", $this->id);
+
+        //execute query
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
