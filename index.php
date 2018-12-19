@@ -73,7 +73,7 @@
                             </td>
 
                             <td>
-                                <a href="#" class="btn btn-primary left-margin">
+                                <a href="read_one.php?id=<?php echo $id; ?>" class="btn btn-primary left-margin">
                                     <span class='glyphicon glyphicon-list'></span> Read
                                 </a>
                                 <a href="update_product.php?id=<?php echo $id; ?>" class="btn btn-info left-margin">
