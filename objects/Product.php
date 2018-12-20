@@ -149,6 +149,7 @@ class Product
         }
     }
 
+    // delete particular object, id is product id
     public function delete() 
     {
 
@@ -157,6 +158,38 @@ class Product
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id", $this->id);
         $stmt->execute();
+
+    }
+
+    public function search($searchTerm, $fromRecordNum, $recordsPerPage) 
+    {
+
+        $query = "SELECT 
+                    id, fullname, price, description, category_id, created 
+                FROM 
+                    " . $this->tableName . "
+                WHERE 
+                    fullname LIKE ? OR description LIKE ? 
+                ORDER BY 
+                    fullname ASC 
+                LIMIT 
+                    ?, ?";
+
+
+        $stmt = $this->conn->prepare($query);
+
+        // bind variable values
+        $searchTerm = "%{$searchTerm}%";
+        $stmt->bindParam(1, $searchTerm);
+        $stmt->bindParam(2, $searchTerm);
+        $stmt->bindParam(3, $fromRecordNum, PDO::PARAM_INT);
+        $stmt->bindParam(4, $recordsPerPage, PDO::PARAM_INT);
+
+        // execute query
+        $stmt->execute();
+
+        // return values from database
+        return $stmt;
 
     }
 
