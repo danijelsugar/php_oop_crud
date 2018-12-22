@@ -26,10 +26,10 @@
     $stmt = $product->search($searchTerm, $fromRecordNum, $recordsPerPage);
 
      // the page where this paging is used
-    $pageUrl = "index.php?s={$searchTerm}";
+    $pageUrl = "search.php?s={$searchTerm}&";
      
     // count all products in the database to calculate total pages
-    $totalRows = $product->countAll();
+    $totalRows = $product->countAllSearch($searchTerm);
 
     include_once 'read_template.php';
     
