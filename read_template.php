@@ -2,7 +2,13 @@
 		<div class="col 12">
 			<form role="search" action="search.php">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Type product name or description..." name="s" id="srch-term" required>
+					<?php 
+
+						$searchValue = isset($searchTerm) ? "value=$searchTerm" : "";
+
+					?>
+					<input type="text" class="form-control" placeholder="Type product name or description..." name="s" id="srch-term"
+					<?php echo $searchValue; ?>>
 					<button class=" btn btn-primary" type="submit">Search</button>
 				</div>
 			</form>
