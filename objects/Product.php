@@ -193,6 +193,7 @@ class Product
 
     }
 
+    // used for paging products based on search term
     public function countAllSearch($searchTerm) 
     {
 
