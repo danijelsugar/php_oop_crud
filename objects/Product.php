@@ -193,4 +193,26 @@ class Product
 
     }
 
+    public function countAllSearch($searchTerm) 
+    {
+
+        $query = "SELECT 
+                    count(*) as total_rows
+                FROM "
+                    . $this->tableName . 
+                " WHERE
+                    fullname LIKE ?";
+
+        $stmt = $this->conn->prepare($query);
+        $searchTerm = "%{$searchTerm}%";
+
+        $stmt->bindParam(1, $searchTerm);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row["total_rows"];
+
+    }
+
 }
