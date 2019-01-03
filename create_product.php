@@ -26,12 +26,13 @@
 		$product->description = $_POST["description"];
 		$product->category_id = $_POST["category_id"];
 
-		//creates product and informs user
+		$image=!empty($_FILES["image"]["name"]) ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"]) : "";
+		$product->image = $image;
+
+		// informs user if creating product is successful
 		if($product->create()){
 			echo '<div class="alert alert-success">Product has been created.</div>';
-		}
-
-		else{
+		}else{
 			echo '<div class="alert alert-danger">Unable to create product.</div>';
 		}
 	}
@@ -44,10 +45,17 @@
     		</div>
         </div>
 	</div>
+<?php 
+
+	// try to upload the submitted file
+	// uploadPhoto() method will return an error message, if any.
+	echo $product->uploadPhoto();
+
+?>
 
 	<div class="row">
 		<div class="col 12">
-			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="fullname">Name</label>
 					<input type="text" name="fullname" class="form-control">
@@ -75,6 +83,10 @@
 						<option value="<?php echo $id; ?>"><?php echo $fullname; ?></option>
 						<?php endwhile; ?>
 					</select>
+				</div>
+				<div class="form-group">
+					<label for="image">Image</label>
+					<input type="file" name="image">
 				</div>
 				<input type="submit" class="btn btn-primary" name="create_product" value="Create">
 			</form>
