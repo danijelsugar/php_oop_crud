@@ -14,6 +14,7 @@ CREATE TABLE products (
 	description text not null,
 	price int not null,
 	category_id int not null,
+	image varchar(255),
 	created datetime,
 	modified timestamp
 );
