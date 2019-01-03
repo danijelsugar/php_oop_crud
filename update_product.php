@@ -35,6 +35,10 @@
 		$product->description = $_POST["description"];
 		$product->category_id = $_POST["category_id"];
 
+		$image=!empty($_FILES["image"]["name"]) ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"]) : "";
+		$product->image = $image;
+
+		// informs user if update is successful
 		if($product->update()){
 			echo '<div class="alert alert-success">Product has been updated.</div>';
 		}else{
@@ -51,10 +55,19 @@
     		</div>
         </div>
 	</div>
+<?php 
 
+	// try to upload the submitted file
+	// uploadPhoto() method will return an error message, if any.
+	
+	if(isset($_FILES["image"])){
+		echo $product->uploadPhoto();
+	}
+
+?>
 	<div class="row">
 		<div class="col 12">
-			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=$id");?>" method="post">
+			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=$id");?>" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="fullname">Name</label>
 					<input type="text" name="fullname" class="form-control" value="<?php echo $product->fullname; ?>">
@@ -73,8 +86,10 @@
 						<option value="0">Select category...</option>
 						<?php 
 
+							// read the product categories from database
 							$stmt = $category->read();
 
+							// write them in drop-down
 							while($rowCategory = $stmt->fetch(PDO::FETCH_ASSOC)){
 								$categoryId = $rowCategory['id'];
 								$categoryFullname = $rowCategory['fullname'];
@@ -90,6 +105,10 @@
 						
 						?>
 					</select>
+				</div>
+				<div class="form-group">
+					<label for="image">Image</label>
+					<input type="file" name="image">
 				</div>
 				<input class="btn btn-primary" type="submit" name="edit" value="Edit">
 			</form>
