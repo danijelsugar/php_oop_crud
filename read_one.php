@@ -55,10 +55,20 @@
 					<td>Category</td>
 					<td>
 						<?php 
-
+						// reads product category
 						$category->id = $product->category_id;
 						$category->readName();
 						echo $category->fullname;
+
+						?>
+					</td>
+				</tr>
+				<tr>
+					<td>Image</td>
+					<td>
+						<?php 
+
+							echo $product->image ? "<img src='uploads/{$product->image}' style='width:300px;' />" : "No image found.";
 
 						?>
 					</td>
