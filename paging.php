@@ -2,9 +2,9 @@
   	<ul class="pagination justify-content-center">
 
 <?php
-	//button for first page
+	// button for first page
 	if($page>1){
-		echo "<li class='page-item'><a class='page-link' href='$pageUrl' title='Go to first page'>First</a></li>";
+		echo "<li class='page-item'><a class='page-link' href='{$pageUrl}' title='Go to first page'>First</a></li>";
 	}
 	
 	//calculates total pages
@@ -34,7 +34,7 @@
     	}
 	}
 
-	//button for last page
+	// button for last page
 	if($page<$totalPages){
 		echo "<li class='page-item'><a class='page-link' href='{$pageUrl}page=$totalPages' title='Last page'>Last</a></li>";
 	}

@@ -38,7 +38,7 @@
 	}
 
 ?>
-	<div class="row">
+	<div class="row form-group">
         <div class="col 12">
     		<div class="right-button-margin">
     			<a href="index.php" class="btn btn-primary pull-right">Read products</a>
@@ -85,7 +85,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="image">Image</label>
+					<label for="image">Upload image</label>
 					<input type="file" name="image">
 				</div>
 				<input type="submit" class="btn btn-primary" name="create_product" value="Create">

@@ -1,33 +1,33 @@
-	<div class="row">
-		<div class="col 12">
+	<div class="row form-group">
+		<div class="col-sm-6">
 			<form role="search" action="search.php">
-				<div class="form-group">
+				<div class="row no-gutters align-items-center">
 					<?php 
 
 						$searchValue = isset($searchTerm) ? "value=$searchTerm" : "";
 
 					?>
-					<input type="text" class="form-control" placeholder="Type product name or description..." name="s" id="srch-term"
-					<?php echo $searchValue; ?>>
-					<button class=" btn btn-primary" type="submit">Search</button>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Type product name or description..." name="s" id="srch-term"
+                        <?php echo $searchValue; ?>>
+                    </div>
+                    <div class="col-auto">
+					   <button class=" btn btn-primary" type="submit">Search</button>
+                    </div>
 				</div>
 			</form>
 		</div>
-	</div>
-	
-	<div class="row">
-        <div class="col 12">
-    		<div class="right-button-margin">
-    			<a href="create_product.php" class="btn btn-primary pull-right">Create product</a>
-    		</div>
+        <div class="col-sm-6">
+            <a href="create_product.php" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Create product</a>  
         </div>
 	</div>
+	
 <?php
     // display product if there are any
     if($totalRows>0): 
 ?>
         <div class="row">
-            <div class="col 12">
+            <div class="col-lg">
                 <table class="table table-hover table-bordered">
                     <thead>
                         <th>Product</th>

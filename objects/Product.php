@@ -205,7 +205,7 @@ class Product
     {
 
         $query = "SELECT 
-                    count(*) as total_rows
+                    count(*) as totalRows
                 FROM "
                     . $this->tableName . 
                 " WHERE

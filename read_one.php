@@ -23,7 +23,7 @@
 	$product->readOne();
 
 	// set page header
-	$pageTitle = 'Update Product';
+	$pageTitle = 'Read one product';
 	include_once 'layout_header.php';
 
 ?>
